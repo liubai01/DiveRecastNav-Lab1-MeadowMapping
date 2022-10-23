@@ -1,8 +1,9 @@
 # RecastNav Lab1 - Meadow Mapping
 
-![](https://img.shields.io/github/license/liubai01/DiveRecastNav-Lab1-MeadowMapping) ![](https://img.shields.io/github/stars/liubai01/DiveRecastNav-Lab1-MeadowMapping)
+![](https://img.shields.io/github/license/liubai01/DiveRecastNav-Lab1-MeadowMapping) ![](https://img.shields.io/github/stars/liubai01/DiveRecastNav-Lab1-MeadowMapping) [![Pylint](https://github.com/liubai01/DiveRecastNav-Lab1-MeadowMapping/actions/workflows/pylint.yml/badge.svg)](https://github.com/liubai01/DiveRecastNav-Lab1-MeadowMapping/actions/workflows/pylint.yml)
 
 ![](docs/banner.png)
+
 
 [Video Tutorial(TBD)]
 
