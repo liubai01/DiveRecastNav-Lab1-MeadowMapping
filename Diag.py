@@ -21,7 +21,7 @@ def diagonalie(verts: np.ndarray, indices: np.ndarray, ia: int, ib: int) -> bool
     :param indices:  np.ndarray (#vert, )    a list of polygon vertex index (to array `verts`)
     :param ia:       int,                    index of `indices` (index to array `verts`) of tested poly diagonal
     :param ib:       int,                    index of `indices` (index to array `verts`) of tested poly diagonal
-    :return: whether <ia, ib> is an external or internal diagonal
+    :return:         bool,                   whether <ia, ib> is an external or internal diagonal
     """
     n = len(indices)
 
@@ -41,7 +41,7 @@ def diagonalie(verts: np.ndarray, indices: np.ndarray, ia: int, ib: int) -> bool
     return True
 
 
-def in_cone(verts, indices, ia, ib):
+def in_cone(verts: np.ndarray, indices: np.ndarray, ia: int, ib: int) -> bool:
     """
     Check whether diagonal <ia, ib> is in the cone of <a-, a, a+>.
     (a- and a+ are previous and next vertex of vertx a)
@@ -52,7 +52,7 @@ def in_cone(verts, indices, ia, ib):
     :param indices:    np.ndarray (#vert, )    a list of polygon vertex index (to array `verts`)
     :param ia:         int,                    index of `indices` (index to array `verts`) of tested poly diagonal
     :param ib:         int,                    index of `indices` (index to array `verts`) of tested poly diagonal
-    :return:
+    :return:           bool,                   whether diagonal <ia, ib> is in cone
     """
     # Check whether (ia, ib) is in cone of (ia-, ia, ia+)
     n = len(indices)
@@ -72,7 +72,15 @@ def in_cone(verts, indices, ia, ib):
                 left_on(verts[ib], verts[ia], verts[ia_prev]))
 
 
-def diagonal(verts, indices, ia, ib):
+def diagonal(verts: np.ndarray, indices: np.ndarray, ia: int, ib: int) -> bool:
+    """
+
+    :param verts:      np.ndarray (#verts, 2)  a list of 2D-vertices position
+    :param indices:    np.ndarray (#vert, )    a list of polygon vertex index (to array `verts`)
+    :param ia:         int,                    index of `indices` (index to array `verts`) of tested poly diagonal
+    :param ib:         int,                    index of `indices` (index to array `verts`) of tested poly diagonal
+    :return:           bool,                   whether diagonal<ia, ib> is an internal diagonal
+    """
     return in_cone(verts, indices, ia, ib) and in_cone(verts, indices, ib, ia) and diagonalie(verts, indices, ia, ib)
 
 
