@@ -12,11 +12,11 @@ The method bases on Arkin, Ronald C.'s report "Path planning for a vision-based 
   organization={SPIE}
 }
 """
-import Diag
-from DiagBasicOps import *
-from utils import *
+from .Diag import *
+from .DiagBasicOps import *
 import numpy as np
 
+__all__ = ["find_concave_vertex", "convexify"]
 
 def find_concave_vertex(verts: np.ndarray, indices: np.ndarray) -> int:
     """
@@ -60,7 +60,7 @@ def convexify(verts: np.ndarray, indices: np.ndarray) -> [[np.ndarray], [(int, i
     i_break = -1
     for i in range(n):
         if i != i_concave:
-            if Diag.diagonal(verts, indices, i_concave, i):
+            if diagonal(verts, indices, i_concave, i):
                 i_break = i
                 break
 
@@ -108,29 +108,3 @@ def convexify(verts: np.ndarray, indices: np.ndarray) -> [[np.ndarray], [(int, i
 
     return i1 + i2, ret_diag
 
-
-if __name__ == "__main__":
-    # Sample test
-    verts_poly = np.array(
-        [
-            [0., 0.], [0., 4.], [2., 4.],
-            [1., 3.], [2., 1.], [3., 3.], [4., 1.],
-            [1., 0.]
-        ]
-    )
-
-    indices_poly = [verts_poly.shape[0] - i - 1 for i in range(verts_poly.shape[0])]  # CCW
-
-    # draw the polygon
-    polys, diags = convexify(verts_poly, indices_poly)
-    plot_poly(verts_poly, indices_poly)
-
-    # Plot diagonals that split original region in dotted line
-    for d in diags:
-        posA = verts_poly[indices_poly[d[0]]]
-        posB = verts_poly[indices_poly[d[1]]]
-        plt.plot([posA[0], posB[0]], [posA[1], posB[1]], "--", c="blue")
-
-    itest = find_concave_vertex(verts_poly, indices_poly)
-
-    plt.show()

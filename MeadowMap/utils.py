@@ -5,6 +5,7 @@ Utils for plotting
 import matplotlib.pyplot as plt
 import numpy as np
 
+__all__ = ["plot_poly", "plt"]
 
 def plot_poly(verts: np.ndarray, indices: np.ndarray, color="blue") -> None:
     """

@@ -13,11 +13,11 @@ The method bases on Arkin, Ronald C.'s report "Path planning for a vision-based 
 }
 """
 
-from DiagIntersect import *
-import ConvexifyNoHole
-import numpy as np
-from utils import *
+from .DiagIntersect import *
+from .ConvexifyNoHole import *
+from .utils import *
 
+__all__ = ["merge_hole"]
 
 def merge_hole(verts_poly: np.ndarray, indices_poly: np.ndarray,
                verts_hole: np.ndarray, indices_hole: np.ndarray) -> (np.ndarray, np.ndarray, (int,)):
@@ -108,7 +108,7 @@ if __name__ == "__main__":
     indicesHole = [i for i in range(vertsHole.shape[0])]  # CW
 
     verts, indices, mergeLineSeg = merge_hole(verts_mypoly, indices_mypoly, vertsHole, indicesHole)
-    polys, diags = ConvexifyNoHole.convexify(verts, indices)
+    polys, diags = convexify(verts, indices)
 
     # plot the result
     plot_poly(verts_mypoly, indices_mypoly, [0, 0, 1.0])

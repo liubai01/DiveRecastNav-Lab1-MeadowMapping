@@ -9,10 +9,11 @@ A diagonal of simple polygon is internal iff
 Refer to: https://github.com/w8r/orourke-compc
 """
 
-from DiagIntersect import *
-from DiagBasicOps import *
-from utils import *
+from .DiagIntersect import *
+from .DiagBasicOps import *
+from .utils import *
 
+__all__ = ["diagonalie", "in_cone", "diagonal"]
 
 def diagonalie(verts: np.ndarray, indices: np.ndarray, ia: int, ib: int) -> bool:
     """
