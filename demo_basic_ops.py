@@ -1,4 +1,4 @@
-from MeadowMap.DiagBasicOps import *
+from meadow_map.basic_ops import *
 import numpy as np
 
 # Sample test

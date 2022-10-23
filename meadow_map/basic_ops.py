@@ -73,5 +73,3 @@ def between(x: np.ndarray, y: np.ndarray, z: np.ndarray) -> bool:
         if x[1] >= z[1] >= y[1]:
             return True
     return False
-
-

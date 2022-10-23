@@ -1,4 +1,4 @@
-from MeadowMap.DiagIntersect import intersect
+from meadow_map.intersect import intersect
 import numpy as np
 import matplotlib.pyplot as plt
 

@@ -1,5 +1,5 @@
-from MeadowMap.ConvexifyNoHole import convexify, find_concave_vertex
-import MeadowMap
+from meadow_map.convex_no_hole import convexify, find_concave_vertex
+import meadow_map
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -17,7 +17,7 @@ indices_poly = [verts_poly.shape[0] - i - 1 for i in range(verts_poly.shape[0])]
 
 # draw the polygon
 polys, diags = convexify(verts_poly, indices_poly)
-MeadowMap.plot_poly(verts_poly, indices_poly)
+meadow_map.plot_poly(verts_poly, indices_poly)
 
 # Plot diagonals that split original region in dotted line
 for d in diags:

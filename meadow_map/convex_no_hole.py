@@ -12,9 +12,10 @@ The method bases on Arkin, Ronald C.'s report "Path planning for a vision-based 
   organization={SPIE}
 }
 """
-from .Diag import *
-from .DiagBasicOps import *
 import numpy as np
+from .diag import diagonal
+from .basic_ops import left_on
+
 
 __all__ = ["find_concave_vertex", "convexify"]
 
@@ -43,11 +44,12 @@ def convexify(verts: np.ndarray, indices: np.ndarray) -> [[np.ndarray], [(int, i
 
     :param verts:       np.ndarray (#verts, 2)  a list of 2D-vertices position
     :param indices:     np.ndarray (#vert, )    a list of polygon vertex index (to array `verts`)
-    :return:  ([np.ndarray], [(int, int)])      a list of indices of `verts` that constructs convex areas
-                                                e.g: [np.array(p1_i1, p1_i2, p1_i3, ..), np.array(p2_i1, ...), ..]
+    :return:  ([np.ndarray], [(int, int)])
+        a list of indices of `verts` that constructs convex areas
+        e.g: [np.array(p1_i1, p1_i2, p1_i3, ..), np.array(p2_i1, ...), ..]
 
-                                                list of diagonals that splits the input polygon.
-                                                e.g: [(diag1_a_index, diag1_b_index), ...]
+        list of diagonals that splits the input polygon.
+        e.g: [(diag1_a_index, diag1_b_index), ...]
     """
     n = len(indices)
     i_concave = find_concave_vertex(verts, indices)
@@ -107,4 +109,3 @@ def convexify(verts: np.ndarray, indices: np.ndarray) -> [[np.ndarray], [(int, i
         )
 
     return i1 + i2, ret_diag
-

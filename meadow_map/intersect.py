@@ -5,7 +5,7 @@ Refer to: https://github.com/w8r/orourke-compc
 """
 
 import numpy as np
-from .DiagBasicOps import *
+from .basic_ops import between, left, collinear
 
 
 def intersect(a: np.ndarray, b: np.ndarray, c: np.ndarray, d: np.ndarray) -> bool:
@@ -18,15 +18,18 @@ def intersect(a: np.ndarray, b: np.ndarray, c: np.ndarray, d: np.ndarray) -> boo
     :return: whether line intersects
     """
     if collinear(a, b, c):
-        return True if between(a, b, c) else False
+        return between(a, b, c)
 
     if collinear(a, b, d):
-        return True if between(a, b, d) else False
+        return between(a, b, d)
 
     if collinear(c, d, a):
-        return True if between(c, d, a) else False
+        return between(c, d, a)
 
     if collinear(c, d, b):
-        return True if between(c, d, b) else False
+        return between(c, d, b)
 
-    return np.logical_xor(left(a, b, c), left(a, b, d)) and np.logical_xor(left(c, d, a), left(c, d, b))
+    cd_cross = np.logical_xor(left(a, b, c), left(a, b, d))
+    ab_cross = np.logical_xor(left(c, d, a), left(c, d, b))
+
+    return ab_cross and cd_cross

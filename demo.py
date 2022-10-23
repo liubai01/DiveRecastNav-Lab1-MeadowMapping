@@ -1,4 +1,4 @@
-import MeadowMap
+import meadow_map
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -21,12 +21,12 @@ vertsHole = np.array(
 )
 indicesHole = [i for i in range(vertsHole.shape[0])]  # CW
 
-verts, indices, mergeLineSeg = MeadowMap.merge_hole(verts_mypoly, indices_mypoly, vertsHole, indicesHole)
-polys, diags = MeadowMap.convexify(verts, indices)
+verts, indices, mergeLineSeg = meadow_map.merge_hole(verts_mypoly, indices_mypoly, vertsHole, indicesHole)
+polys, diags = meadow_map.convexify(verts, indices)
 
 # plot the result
-MeadowMap.plot_poly(verts_mypoly, indices_mypoly, [0, 0, 1.0])
-MeadowMap.plot_poly(vertsHole, indicesHole, [0.0, 0.0, 0.0])
+meadow_map.plot_poly(verts_mypoly, indices_mypoly, [0, 0, 1.0])
+meadow_map.plot_poly(vertsHole, indicesHole, [0.0, 0.0, 0.0])
 # plot all diags. with dotted line
 for d in diags:
     posA = verts[indices[d[0]]]
