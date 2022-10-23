@@ -5,7 +5,7 @@ Refer to: https://github.com/w8r/orourke-compc
 """
 
 import numpy as np
-import DiagBasicOps
+from DiagBasicOps import *
 
 
 def intersect(a: np.ndarray, b: np.ndarray, c: np.ndarray, d: np.ndarray) -> bool:
@@ -17,20 +17,19 @@ def intersect(a: np.ndarray, b: np.ndarray, c: np.ndarray, d: np.ndarray) -> boo
     :param d:  np.ndarray, a 2D vector (point of line cd)
     :return: whether line intersects
     """
-    if DiagBasicOps.collinear(a, b, c):
-        return True if DiagBasicOps.between(a, b, c) else False
+    if collinear(a, b, c):
+        return True if between(a, b, c) else False
 
-    if DiagBasicOps.collinear(a, b, d):
-        return True if DiagBasicOps.between(a, b, d) else False
+    if collinear(a, b, d):
+        return True if between(a, b, d) else False
 
-    if DiagBasicOps.collinear(c, d, a):
-        return True if DiagBasicOps.between(c, d, a) else False
+    if collinear(c, d, a):
+        return True if between(c, d, a) else False
 
-    if DiagBasicOps.collinear(c, d, b):
-        return True if DiagBasicOps.between(c, d, b) else False
+    if collinear(c, d, b):
+        return True if between(c, d, b) else False
 
-    return np.logical_xor(DiagBasicOps.left(a, b, c), DiagBasicOps.left(a, b, d)) and \
-           np.logical_xor(DiagBasicOps.left(c, d, a), DiagBasicOps.left(c, d, b))
+    return np.logical_xor(left(a, b, c), left(a, b, d)) and np.logical_xor(left(c, d, a), left(c, d, b))
 
 
 if __name__ == "__main__":

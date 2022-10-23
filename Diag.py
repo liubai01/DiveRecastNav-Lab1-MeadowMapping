@@ -11,12 +11,15 @@ Refer to: https://github.com/w8r/orourke-compc
 
 from DiagIntersect import *
 from DiagBasicOps import *
+from utils import *
 
 
 def diagonalie(verts: np.ndarray, indices: np.ndarray, ia: int, ib: int) -> bool:
     """
     Check whether diagonal <ia, ib> is internal/external diagonal that
     does not intersect with any edge in poly (except for incident edge of ia, ib).
+
+    Remark: indices should be in counter-clock wise.
     :param verts:    np.ndarray (#verts, 2)  a list of 2D-vertices position
     :param indices:  np.ndarray (#vert, )    a list of polygon vertex index (to array `verts`)
     :param ia:       int,                    index of `indices` (index to array `verts`) of tested poly diagonal
@@ -48,6 +51,7 @@ def in_cone(verts: np.ndarray, indices: np.ndarray, ia: int, ib: int) -> bool:
 
     Refer to "Computational Geometry in C" Section 1.6.3 for details.
 
+    Remark: indices should be in counter-clock wise.
     :param verts:      np.ndarray (#verts, 2)  a list of 2D-vertices position
     :param indices:    np.ndarray (#vert, )    a list of polygon vertex index (to array `verts`)
     :param ia:         int,                    index of `indices` (index to array `verts`) of tested poly diagonal
@@ -74,7 +78,9 @@ def in_cone(verts: np.ndarray, indices: np.ndarray, ia: int, ib: int) -> bool:
 
 def diagonal(verts: np.ndarray, indices: np.ndarray, ia: int, ib: int) -> bool:
     """
+    Check whether diagonal <ia, ib> is internal diagonal
 
+    Remark: indices should be in counter-clock wise.
     :param verts:      np.ndarray (#verts, 2)  a list of 2D-vertices position
     :param indices:    np.ndarray (#vert, )    a list of polygon vertex index (to array `verts`)
     :param ia:         int,                    index of `indices` (index to array `verts`) of tested poly diagonal
@@ -85,7 +91,6 @@ def diagonal(verts: np.ndarray, indices: np.ndarray, ia: int, ib: int) -> bool:
 
 
 if __name__ == "__main__":
-    import matplotlib.pyplot as plt
     # Sample test
     verts_poly = np.array(
         [

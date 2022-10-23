@@ -5,6 +5,7 @@ which would be used in Meadow Mapping
 Refer to: https://github.com/w8r/orourke-compc
 """
 import numpy as np
+from utils import *
 
 
 def left(x: np.ndarray, y: np.ndarray, z: np.ndarray) -> bool:
@@ -115,8 +116,6 @@ if __name__ == "__main__":
     print("e is on ab?")
     print(collinear(a, b, e))
     print()
-
-    import matplotlib.pyplot as plt
 
     plt.scatter([a[0]], [a[1]], label="a")
     plt.scatter([b[0]], [b[1]], label="b")

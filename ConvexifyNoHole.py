@@ -14,6 +14,7 @@ The method bases on Arkin, Ronald C.'s report "Path planning for a vision-based 
 """
 import Diag
 from DiagBasicOps import *
+from utils import *
 import numpy as np
 
 
@@ -109,7 +110,6 @@ def convexify(verts: np.ndarray, indices: np.ndarray) -> [[np.ndarray], [(int, i
 
 
 if __name__ == "__main__":
-    import matplotlib.pyplot as plt
     # Sample test
     verts_poly = np.array(
         [
@@ -120,18 +120,6 @@ if __name__ == "__main__":
     )
 
     indices_poly = [verts_poly.shape[0] - i - 1 for i in range(verts_poly.shape[0])]  # CCW
-
-    def plot_poly(verts, indices):
-        x = []
-        y = []
-        for i in indices:
-            x.append(verts[i][0])
-            y.append(verts[i][1])
-
-        x.append(verts[indices[0]][0])
-        y.append(verts[indices[0]][1])
-
-        plt.plot(x, y, c="blue")
 
     # draw the polygon
     polys, diags = convexify(verts_poly, indices_poly)
