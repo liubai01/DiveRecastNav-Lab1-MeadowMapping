@@ -16,8 +16,8 @@ import numpy as np
 from .diag import diagonal
 from .basic_ops import left_on
 
-
 __all__ = ["find_concave_vertex", "convexify"]
+
 
 def find_concave_vertex(verts: np.ndarray, indices: np.ndarray) -> int:
     """

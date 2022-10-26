@@ -1,5 +1,6 @@
 from meadow_map.basic_ops import *
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Sample test
 a = np.array([0, 0], dtype=np.float64)
@@ -43,3 +44,10 @@ print("e is on ab?")
 print(collinear(a, b, e))
 print()
 
+plt.plot([a[0], b[0]], [a[1], b[1]], label="ab")
+plt.scatter([c[0]], [c[1]], label="c")
+plt.scatter([d[0]], [d[1]], label="d")
+plt.scatter([e[0]], [e[1]], label="e")
+
+plt.legend()
+plt.show()

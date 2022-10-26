@@ -13,8 +13,8 @@ import numpy as np
 from .intersect import intersect
 from .basic_ops import left, left_on
 
-
 __all__ = ["diagonalie", "in_cone", "diagonal"]
+
 
 def diagonalie(verts: np.ndarray, indices: np.ndarray, ia: int, ib: int) -> bool:
     """
