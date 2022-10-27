@@ -54,7 +54,7 @@ def merge_hole(verts_poly: np.ndarray, indices_poly: np.ndarray,
     hole_i = indices_hole[0]
 
     # traverse all vertex in poly to check whether it is in `hole_i`'s line of sight
-    for poly_i in indices_poly:
+    for poly_idx, poly_i in enumerate(indices_poly):
         okay = True
         # check whether `hole_i, poly_i` intersects with each poly edge
         for poly_edge in range(n_poly):
@@ -84,23 +84,23 @@ def merge_hole(verts_poly: np.ndarray, indices_poly: np.ndarray,
 
         if okay:
             verts_out = np.concatenate((verts_poly, verts_hole), axis=0)
-            indices_out = [indices_poly[poly_i], indices_hole[hole_i] + n_poly]
+            indices_out = [poly_i, hole_i + n_poly]
             # all hole index applied an offset of nPoly
 
-            now_holei = (hole_i + 1) % n_hole
-            while now_holei != hole_i:
+            now_holei = 1 % n_hole
+            while indices_hole[now_holei] != hole_i:
                 indices_out.append(indices_hole[now_holei] + n_poly)
                 now_holei = (now_holei + 1) % n_hole
 
-            indices_out.append(indices_hole[hole_i] + n_poly)
-            indices_out.append(indices_poly[poly_i])
+            indices_out.append(hole_i + n_poly)
+            indices_out.append(poly_i)
 
-            now_polyi = (poly_i + 1) % n_poly
-            while now_polyi != poly_i:
+            now_polyi = (poly_idx + 1) % n_poly
+            while indices_poly[now_polyi] != poly_i:
                 indices_out.append(indices_poly[now_polyi])
                 now_polyi = (now_polyi + 1) % n_poly
 
-            return verts_out, indices_out, (indices_hole[hole_i] + n_poly, indices_poly[poly_i])
+            return verts_out, indices_out, (hole_i + n_poly, poly_i)
 
     # Fail fallback: discard the hole
     return verts_poly, indices_poly, None

@@ -1,3 +1,6 @@
 numpy
 matplotlib
 pylint
+coverage
+nose
+shapely

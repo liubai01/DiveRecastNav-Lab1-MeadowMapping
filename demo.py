@@ -24,29 +24,30 @@ def plot_poly(verts: np.ndarray, indices: np.ndarray, color="blue") -> None:
 
 
 # The poly region that we want to divide into convex areas
-verts_mypoly = np.array(
+verts_poly = np.array(
     [
         [0., 0.], [0., 4.], [2., 4.],
         [1., 3.], [2., 1.], [3., 3.], [4., 1.],
         [1., 0.]
     ]
 )
-indices_mypoly = [verts_mypoly.shape[0] - i - 1 for i in range(verts_mypoly.shape[0])]  # CCW
+indices_poly = [verts_poly.shape[0] - i - 1 for i in range(verts_poly.shape[0])]  # CCW
 
-vertsHole = np.array(
+verts_hole = np.array(
     [
         [0.5, 0.5], [0.2, 1.5], [0.4, 2.],
         [1.8, 0.5]
     ]
 )
-indicesHole = [i for i in range(vertsHole.shape[0])]  # CW
+indices_hole = [(i + 2) % 4 for i in range(verts_hole.shape[0])]  # CW
 
-verts, indices, mergeLineSeg = meadow_map.merge_hole(verts_mypoly, indices_mypoly, vertsHole, indicesHole)
+verts, indices, mergeLineSeg = meadow_map.merge_hole(verts_poly, indices_poly, verts_hole, indices_hole)
 polys, diags = meadow_map.convexify(verts, indices)
 
 # plot the result
-plot_poly(verts_mypoly, indices_mypoly, [0, 0, 1.0])
-plot_poly(vertsHole, indicesHole, [0.0, 0.0, 0.0])
+plot_poly(verts_poly, indices_poly, [0, 0, 1.0])
+plot_poly(verts_hole, indices_hole, [0.0, 0.0, 0.0])
+
 # plot all diags. with dotted line
 for d in diags:
     posA = verts[indices[d[0]]]
@@ -56,7 +57,7 @@ for d in diags:
 plt.plot(
     [verts[mergeLineSeg[0]][0], verts[mergeLineSeg[1]][0]],
     [verts[mergeLineSeg[0]][1], verts[mergeLineSeg[1]][1]],
-    "--", c=[0.4, 0.4, 0.8]
+    "--", c=[0.9, 0.4, 0.8]
 )
 
 plt.grid()

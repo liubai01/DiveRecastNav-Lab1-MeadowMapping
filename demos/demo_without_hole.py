@@ -45,8 +45,6 @@ for d in diags:
     pos_b = verts_poly[indices_poly[d[1]]]
     plt.plot([pos_a[0], pos_b[0]], [pos_a[1], pos_b[1]], "--", c="blue")
 
-itest = find_concave_vertex(verts_poly, indices_poly)
-
 plt.grid()
 plt.title("Convexify simple polygon (without hole)")
 plt.show()
