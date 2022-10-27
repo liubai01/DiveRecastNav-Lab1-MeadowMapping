@@ -1,7 +1,8 @@
 # RecastNav Lab1 - Meadow Mapping
 
-![](https://img.shields.io/github/license/liubai01/DiveRecastNav-Lab1-MeadowMapping) ![](https://img.shields.io/github/stars/liubai01/DiveRecastNav-Lab1-MeadowMapping) [![Pylint](https://github.com/liubai01/DiveRecastNav-Lab1-MeadowMapping/actions/workflows/pylint.yml/badge.svg)](https://github.com/liubai01/DiveRecastNav-Lab1-MeadowMapping/actions/workflows/pylint.yml)
-
+![](https://img.shields.io/github/license/liubai01/DiveRecastNav-Lab1-MeadowMapping) ![](https://img.shields.io/github/stars/liubai01/DiveRecastNav-Lab1-MeadowMapping) 
+[![Pylint](https://github.com/liubai01/DiveRecastNav-Lab1-MeadowMapping/actions/workflows/pylint.yml/badge.svg)](https://github.com/liubai01/DiveRecastNav-Lab1-MeadowMapping/actions/workflows/pylint.yml)
+[![Testcases](https://github.com/liubai01/DiveRecastNav-Lab1-MeadowMapping/actions/workflows/Testcases.yml/badge.svg)](https://github.com/liubai01/DiveRecastNav-Lab1-MeadowMapping/actions/workflows/Testcases.yml)
 ![](docs/banner.png)
 
 [[Video Tutorial(Mandarin Chinese)](https://www.bilibili.com/video/BV19G4y187Fz/)]   [[Tutorial Main-page](https://cims.nyu.edu/~yx2412/nav/)]
