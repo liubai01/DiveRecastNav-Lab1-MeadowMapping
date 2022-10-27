@@ -3,6 +3,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+def plot_poly(verts: np.ndarray, indices: np.ndarray, color="blue") -> None:
+    """
+    Plot the simple polygon.
+    :param verts:      np.ndarray (#verts, 2)  a list of 2D-vertices position
+    :param indices:    np.ndarray (#vert, )    a list of polygon vertex index (to array `verts`)
+    :param color:      str                     color
+    :return:
+    """
+    x = []
+    y = []
+    for i in indices:
+        x.append(verts[i][0])
+        y.append(verts[i][1])
+
+    x.append(verts[indices[0]][0])
+    y.append(verts[indices[0]][1])
+
+    plt.plot(x, y, c=color)
+
+
 # The poly region that we want to divide into convex areas
 verts_mypoly = np.array(
     [
@@ -25,8 +45,8 @@ verts, indices, mergeLineSeg = meadow_map.merge_hole(verts_mypoly, indices_mypol
 polys, diags = meadow_map.convexify(verts, indices)
 
 # plot the result
-meadow_map.plot_poly(verts_mypoly, indices_mypoly, [0, 0, 1.0])
-meadow_map.plot_poly(vertsHole, indicesHole, [0.0, 0.0, 0.0])
+plot_poly(verts_mypoly, indices_mypoly, [0, 0, 1.0])
+plot_poly(vertsHole, indicesHole, [0.0, 0.0, 0.0])
 # plot all diags. with dotted line
 for d in diags:
     posA = verts[indices[d[0]]]

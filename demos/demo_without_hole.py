@@ -4,6 +4,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+def plot_poly(verts: np.ndarray, indices: np.ndarray, color="blue") -> None:
+    """
+    Plot the simple polygon.
+    :param verts:      np.ndarray (#verts, 2)  a list of 2D-vertices position
+    :param indices:    np.ndarray (#vert, )    a list of polygon vertex index (to array `verts`)
+    :param color:      str                     color
+    :return:
+    """
+    x = []
+    y = []
+    for i in indices:
+        x.append(verts[i][0])
+        y.append(verts[i][1])
+
+    x.append(verts[indices[0]][0])
+    y.append(verts[indices[0]][1])
+
+    plt.plot(x, y, c=color)
+
+
 # Sample test
 verts_poly = np.array(
     [
@@ -17,7 +37,7 @@ indices_poly = [verts_poly.shape[0] - i - 1 for i in range(verts_poly.shape[0])]
 
 # draw the polygon
 polys, diags = convexify(verts_poly, indices_poly)
-meadow_map.plot_poly(verts_poly, indices_poly)
+plot_poly(verts_poly, indices_poly)
 
 # Plot diagonals that split original region in dotted line
 for d in diags:

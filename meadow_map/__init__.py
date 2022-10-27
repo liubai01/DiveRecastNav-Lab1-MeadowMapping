@@ -16,4 +16,3 @@ The method bases on Arkin, Ronald C.'s report "Path planning for a vision-based 
 
 from .convex_no_hole import convexify
 from .convex_with_hole import merge_hole
-from .utils import plot_poly

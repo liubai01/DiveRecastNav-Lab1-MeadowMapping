@@ -1,7 +1,6 @@
 import numpy as np
 from meadow_map.diag import diagonalie, in_cone
 import matplotlib.pyplot as plt
-from meadow_map.utils import plot_poly
 
 # Sample test
 verts_poly = np.array(
@@ -11,7 +10,7 @@ verts_poly = np.array(
         [1., 0.]
     ][::-1]
 )
-indices_poly = [verts_poly.shape[0] - i - 1 for i in range(verts_poly.shape[0])]  # CCW
+indices_poly = [i for i in range(verts_poly.shape[0])]  # CCW
 
 # Visualize 4 diagonal status
 plt_ids = [221, 222, 223, 224]
@@ -20,12 +19,14 @@ dibs = [2, 4, 6, 2]
 
 for pid, dia, dib in zip(plt_ids, dias, dibs):
     diag = diagonalie(verts_poly, indices_poly, dia, dib)
-    lbl = "not intersect" if diag else "intersect"
-    if diag:
-        internal = in_cone(verts_poly, indices_poly, dia, dib)
-        lbl += " (internal)" if internal else " (external)"
+    lbl = "not intersect" if diag else "intersect "
+
+    internal = in_cone(verts_poly, indices_poly, dia, dib)
+    lbl += " (internal)" if internal else " (external)"
 
     plt.subplot(pid)
+    # print cone apex
+    plt.scatter([[verts_poly[dia, 0]]], [[verts_poly[dia, 1]]])
     # print polygon
     plt.plot(
         list(verts_poly[:, 0]) + [verts_poly[0, 0]],
