@@ -49,7 +49,9 @@ def merge_hole(verts_poly: np.ndarray, indices_poly: np.ndarray,
             (2) `diag` is index of edge that merges poly and hole.
     """
     n_poly = len(indices_poly)
+    n_poly_verts = verts_poly.shape[0]
     n_hole = len(indices_hole)
+    n_hole_verts = verts_hole.shape[0]
 
     hole_i = indices_hole[0]
 
@@ -84,23 +86,25 @@ def merge_hole(verts_poly: np.ndarray, indices_poly: np.ndarray,
 
         if okay:
             verts_out = np.concatenate((verts_poly, verts_hole), axis=0)
-            indices_out = [poly_i, hole_i + n_poly]
+            indices_out = [poly_i, hole_i + n_poly_verts]
             # all hole index applied an offset of nPoly
 
+            # add hole verts to out
             now_holei = 1 % n_hole
             while indices_hole[now_holei] != hole_i:
-                indices_out.append(indices_hole[now_holei] + n_poly)
+                indices_out.append(indices_hole[now_holei] + n_poly_verts)
                 now_holei = (now_holei + 1) % n_hole
 
-            indices_out.append(hole_i + n_poly)
+            indices_out.append(hole_i + n_poly_verts)
             indices_out.append(poly_i)
 
+            # add poly verts to out
             now_polyi = (poly_idx + 1) % n_poly
             while indices_poly[now_polyi] != poly_i:
                 indices_out.append(indices_poly[now_polyi])
                 now_polyi = (now_polyi + 1) % n_poly
 
-            return verts_out, indices_out, (hole_i + n_poly, poly_i)
+            return verts_out, indices_out, (hole_i + n_poly_verts, poly_i)
 
     # Fail fallback: discard the hole
     return verts_poly, indices_poly, None

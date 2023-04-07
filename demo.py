@@ -39,14 +39,31 @@ verts_hole = np.array(
         [1.8, 0.5]
     ]
 )
-indices_hole = [(i + 2) % 4 for i in range(verts_hole.shape[0])]  # CW
+
+verts_hole = np.array(
+    [
+        [0.5, 0.5], [0.2, 1.5], [0.4, 2.],
+        [1.8, 0.5]
+    ]
+)
+
+verts_hole1 = np.array(
+    [
+        [2.5 , 1.], [3. , 2] , [3.5 , 1]
+    ]
+)
+indices_hole = [(i + 2) % verts_hole.shape[0] for i in range(verts_hole.shape[0])]  # CW
+indices_hole1 = [(i + 2) % verts_hole1.shape[0] for i in range(verts_hole1.shape[0])]  # CW
 
 verts, indices, mergeLineSeg = meadow_map.merge_hole(verts_poly, indices_poly, verts_hole, indices_hole)
+verts, indices, mergeLineSeg = meadow_map.merge_hole(verts, indices, verts_hole1, indices_hole1)
+
 polys, diags = meadow_map.convexify(verts, indices)
 
 # plot the result
 plot_poly(verts_poly, indices_poly, [0, 0, 1.0])
 plot_poly(verts_hole, indices_hole, [0.0, 0.0, 0.0])
+plot_poly(verts_hole1, indices_hole1, [0.0, 0.0, 0.0])
 
 # plot all diags. with dotted line
 for d in diags:
