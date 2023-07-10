@@ -55,8 +55,8 @@ verts_hole1 = np.array(
 indices_hole = [(i + 2) % verts_hole.shape[0] for i in range(verts_hole.shape[0])]  # CW
 indices_hole1 = [(i + 2) % verts_hole1.shape[0] for i in range(verts_hole1.shape[0])]  # CW
 
-verts, indices, mergeLineSeg = meadow_map.merge_hole(verts_poly, indices_poly, verts_hole, indices_hole)
-verts, indices, mergeLineSeg = meadow_map.merge_hole(verts, indices, verts_hole1, indices_hole1)
+verts, indices, mergeLineSeg1 = meadow_map.merge_hole(verts_poly, indices_poly, verts_hole, indices_hole)
+verts, indices, mergeLineSeg2 = meadow_map.merge_hole(verts, indices, verts_hole1, indices_hole1)
 
 polys, diags = meadow_map.convexify(verts, indices)
 
@@ -72,10 +72,17 @@ for d in diags:
     plt.plot([posA[0], posB[0]], [posA[1], posB[1]], "--", c=[0.4, 0.4, 0.8])
 # plot the line segment that merge the hole
 plt.plot(
-    [verts[mergeLineSeg[0]][0], verts[mergeLineSeg[1]][0]],
-    [verts[mergeLineSeg[0]][1], verts[mergeLineSeg[1]][1]],
+    [verts[mergeLineSeg1[0]][0], verts[mergeLineSeg1[1]][0]],
+    [verts[mergeLineSeg1[0]][1], verts[mergeLineSeg1[1]][1]],
     "--", c=[0.9, 0.4, 0.8]
 )
+
+plt.plot(
+    [verts[mergeLineSeg2[0]][0], verts[mergeLineSeg2[1]][0]],
+    [verts[mergeLineSeg2[0]][1], verts[mergeLineSeg2[1]][1]],
+    "--", c=[0.9, 0.4, 0.8]
+)
+
 
 plt.grid()
 plt.title("Convexify with holes")
