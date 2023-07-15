@@ -233,34 +233,6 @@ def constructPath(predecessors, start, goal):
         current_poly = predecessors[current_poly]
     return path_polys
 
-
-# A star
-# def findPassPolys(poly_neighbour, startPoly, endPoly):
-#     """
-#     Return the pass polygon indices between start polygon and end polygon.
-#     :param poly_neighbour   dictionary  all the polys's neighbours
-#     :param startPoly:       int         the index of start polygon
-#     :param endPoly:         int         the index of end polygon
-#     :return:                list        a list of the pass polygon indices between start polygon and end polygon.
-#     """
-#     closeList = {}  # visited poly
-#     queue = []
-#
-#     predecessors = {}
-#
-#     queue.append(startPoly)
-#     closeList[startPoly] = True
-#
-#     while len(queue) > 0:
-#         node = queue.pop()
-#         if node == endPoly:
-#             return constructPath(predecessors, startPoly, endPoly)
-#         for diag_num, poly_indice in poly_neighbour[node].items():
-#             if poly_indice not in closeList:
-#                 queue.append(poly_indice)
-#                 closeList[poly_indice] = True
-#                 predecessors[poly_indice] = node
-
 # overloading the compare function of binaryheap
 def custom_compare(node1, node2):
     if node1['f'] == node2['f']:
@@ -277,7 +249,7 @@ def insert(self, value):
     self.value_index_map[value['polyIndice']] = value
     self._percolate_up(index)
 
-
+#A* algorithm
 def findPassPolys(poly_neighbour, startPoly, endPoly):
     """
     Return the pass polygon indices between start polygon and end polygon.
